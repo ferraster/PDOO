@@ -16,7 +16,7 @@ module DeepSpace
           "nSupplies=#{@nSupplies} nWeapons=#{@nWeapons} nShields=#{@nShields} nHangars=#{@nHangars} nMedals=#{@nMedals}"     
         end
         
-        def LootToUI
+        def getUIversion
           LootToUI.new(self)
         end 
       end
