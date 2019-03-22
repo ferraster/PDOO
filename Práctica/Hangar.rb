@@ -21,7 +21,7 @@ module Deepspace
             HangarToUI.new(self)
         end 
 
-        private 
+        
         def spaceAvailable
             (@WeaponList.size+@ShieldBoosterList.size)<@maxElements 
         end 
@@ -42,19 +42,19 @@ module Deepspace
             else
                 false
             end  
-        end 
+        end #QUITAR LOS LIST 
 
         def removeWeapon(w)
             if(@WeaponList.size>w)
-                @WeaponList.delete(w)
+                @WeaponList.delete_at(w)
             else
                 nil
             end  
         end
 
         def removeShieldBooster(s)
-            if(@ShieldBoosterList.size>w)
-                @ShieldBoosterList.delete(w)
+            if(@ShieldBoosterList.size>s)
+                @ShieldBoosterList.delete_at(s) #--------------
             else
                 nil
             end  
@@ -70,6 +70,9 @@ module Deepspace
 
         def getMaxElements
             @maxElements
-        end ,
+        end 
+
+        private :spaceAvailable
+
     end 
 end 
