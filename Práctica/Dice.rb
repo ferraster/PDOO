@@ -1,6 +1,6 @@
 #encoding: UTF-8
 
-module DeepSpace
+module Deepspace
     class Dice 
         def initialize()
             @NHANGARSPROB=0.25
@@ -65,8 +65,13 @@ module DeepSpace
             "NHANGARSPROB=#{@NHANGARSPROB} NSHIELDSPROB=#{@NSHIELDSPROB} NWEAPONSPROB=#{@NWEAPONSPROB} FIRSTSHOTPROB=#{@FIRSTSHOTPROB}"
         end 
 
-        def DiceToUI
-            DiceToUI(self)
+        def getUIversion
+            DiceToUI.new(self)
         end
     end
 end 
+
+
+d=Deepspace::Dice.new
+
+puts d.to_s

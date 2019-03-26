@@ -1,6 +1,6 @@
 #encoding: UTF-8 
 
-module DeepSpace 
+module Deepspace 
     module WeaponType
         class Type 
             def initialize(p)

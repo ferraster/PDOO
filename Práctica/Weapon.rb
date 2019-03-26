@@ -1,6 +1,6 @@
 #encoding: UTF-8  
 
-module DeepSpace 
+module Deepspace 
     class Weapon 
         def initialize(name_,weaponType_,uses_)
             @name=name_
@@ -8,32 +8,18 @@ module DeepSpace
             @uses=uses_
         end 
 
+        attr_reader :name, :type , :uses 
+
         def self.newCopy(w)
             new(w.name,w.type,w.uses)
         end
         
-        def name
-            @name
-        end
-
-        def uses
-            @uses
-        end 
-
-        def type 
-            @type
-        end 
-
-        def power
-            @type.power
-        end 
-
-        def useIt()
+        def useIt
             if(self.uses>0)
                 @uses=self.uses-1
-                ret=@type.power
+                @type.power
             else
-                ret=1.0
+                1.0
             end 
         end
         
@@ -41,8 +27,8 @@ module DeepSpace
             "name=#{@name} type=#{@type} uses=#{@uses}"
         end 
 
-        def WeaponToUI
-            WeaponToUI(self)
+        def getUIversion
+            WeaponToUI.new(self)
         end 
     end 
 end 

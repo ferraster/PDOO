@@ -1,6 +1,6 @@
 #encoding: UTF-8 
 
-module DeepSpace 
+module Deepspace 
     class ShieldBooster
         def initialize(name_,boost_,uses_)
             @name=name_
@@ -8,20 +8,10 @@ module DeepSpace
             @uses=uses_
         end 
 
+        attr_reader :name , :boost , :uses 
+
         def self.newCopy(shieldBooster_)
             new(shieldBooster_.name,shieldBooster_.boost,shieldBooster_.uses)
-        end 
-
-        def name 
-            @name 
-        end 
-         
-        def boost 
-            @boost
-        end 
-
-        def uses
-            @uses
         end 
 
         def useIt
@@ -31,14 +21,15 @@ module DeepSpace
             else 
                 retval=1.0
             end 
+            retval
         end 
 
         def to_s 
             "name=#{@name} boost=#{@boost} uses=#{@uses}"
         end 
 
-        def ShieldBoosterToUI
-            new ShieldBoosterToUI(self)
+        def getUIversion
+            ShieldBoosterToUI.new(self)
         end 
     end 
 end 

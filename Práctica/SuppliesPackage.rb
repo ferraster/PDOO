@@ -8,28 +8,18 @@ module DeepSpace
             @shieldPower=shieldPower_
         end 
 
+        attr_reader :ammorPower, :fuelUnits, :shieldPower
+
         def self.newCopy(suppliesPackage_)
             new(suppliesPackage_.ammoPower,suppliesPackage_.fuelUnits,suppliesPackage_.shieldPower)
         end     
-
-        def ammoPower
-            @ammoPower
-        end 
-
-        def fuelUnits
-            @fuelUnits
-        end 
-
-        def shieldPower
-            @shieldPower
-        end 
 
         def to_s 
             "ammoPower=#{@ammoPower} fuelUnits=#{@fuelUnits} shieldPower=#{@shieldPower}"
         end 
 
-        def SuppliesPackageToUI 
-            SuppliesPackageToUI(self)
+        def getUIversion
+            SuppliesPackageToUI.new(self)
         end 
     end 
 end 

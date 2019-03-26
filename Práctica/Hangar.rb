@@ -1,19 +1,24 @@
 #encoding: UTF-8
 
+require_relative './ShieldBooster.rb'
+
 module Deepspace 
     class Hangar 
         @maxElements
     
         def initialize(capacity)
             @maxElements=capacity 
-            @ShieldBoosterList=Array.new
-            @WeaponList=Array.new
+            @shieldBoosters=Array.new
+            @weapons=Array.new
         end 
+
+        attr_reader :shieldBoosters , :weapons , :maxElements
+        attr_writer :weapons , :shieldBoosters
 
         def self.newCopy(h)
             n=new(h.getMaxElements)
-            n.WeaponList=h.getWeapons
-            n.ShieldBoosterList=h.getShieldBoosters
+            n.weapons=h.getWeapons
+            n.shieldBoosters=h.getshieldBoosters
             n
         end 
 
@@ -23,12 +28,12 @@ module Deepspace
 
         
         def spaceAvailable
-            (@WeaponList.size+@ShieldBoosterList.size)<@maxElements 
+            (@weapons.length+@shieldBoosters.length)<@maxElements 
         end 
 
         def addWeapon(w)
-            if(self.spaceAvailable)
-                @WeaponList.push(w)
+            if(spaceAvailable)
+                @weapons.push(w)
                 true 
             else
                 false
@@ -36,43 +41,42 @@ module Deepspace
         end 
 
         def addShieldBooster(s)
-            if(self.spaceAvailable)
-                @ShieldBoosterList.push(s)
+            if(spaceAvailable)
+                @shieldBoosters.push(s)
                 true 
             else
                 false
             end  
-        end #QUITAR LOS LIST 
+        end   
 
         def removeWeapon(w)
-            if(@WeaponList.size>w)
-                @WeaponList.delete_at(w)
+            if(@weapons.size>w)
+                @weapons.delete_at(w)
             else
                 nil
             end  
         end
 
         def removeShieldBooster(s)
-            if(@ShieldBoosterList.size>s)
-                @ShieldBoosterList.delete_at(s) #--------------
+            if(@shieldBoosters.length>s)
+                @shieldBoosters.delete_at(s) #--------------
             else
                 nil
             end  
         end
 
         def getWeapons
-            @WeaponList
+            @weapons
         end 
 
-        def getShieldBoosters
-            @ShieldBoosterList
+        def getshieldBoosters
+            @shieldBoosters
         end 
 
         def getMaxElements
             @maxElements
         end 
-
+         
         private :spaceAvailable
-
     end 
 end 
