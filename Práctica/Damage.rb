@@ -21,8 +21,7 @@ module Deepspace
         end
 
         def self.newSpecificWeapons(wl,s)
-            new(-1,s,wl)
-            
+            new(-1,s,wl)    
         end 
 
         def self.newCopy(d)
@@ -105,7 +104,8 @@ s.push(a)
 s.push(b)
 s.push(c)
 puts d.inspect
-d=d.adjust(armillas,s)
-puts d.inspect
-puts nuevo.hasNoEffect
+puts d.arrayContainsType(armillas,Deepspace::WeaponType::MISSILE)
+#d=d.adjust(armillas,s)
+#puts d.inspect
+#puts nuevo.hasNoEffect
 

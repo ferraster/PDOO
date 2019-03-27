@@ -1,10 +1,12 @@
 #encoding: UTF-8
 
-require_relative './ShieldBooster.rb'
+require_relative 'ShieldBooster'
+require_relative 'Weapon'
+require_relative 'WeaponType'
+require_relative 'HangarToUI'
 
 module Deepspace 
     class Hangar 
-        @maxElements
     
         def initialize(capacity)
             @maxElements=capacity 
@@ -13,13 +15,11 @@ module Deepspace
         end 
 
         attr_reader :shieldBoosters , :weapons , :maxElements
-        attr_writer :weapons , :shieldBoosters
 
         def self.newCopy(h)
-            n=new(h.getMaxElements)
-            n.weapons=h.getWeapons
-            n.shieldBoosters=h.getshieldBoosters
-            n
+            n=new(h.maxElements)
+            h.weapons.map{ |x| h.addWeapon(x)}
+            h.shieldBoosters.map{ |x| h.addShieldBooster(x)}
         end 
 
         def getUIversion
@@ -50,7 +50,7 @@ module Deepspace
         end   
 
         def removeWeapon(w)
-            if(@weapons.size>w)
+            if(@weapons.length>w)
                 @weapons.delete_at(w)
             else
                 nil
@@ -65,18 +65,19 @@ module Deepspace
             end  
         end
 
-        def getWeapons
-            @weapons
-        end 
-
-        def getshieldBoosters
-            @shieldBoosters
-        end 
-
-        def getMaxElements
-            @maxElements
+        def to_s
+            getUIversion.to_s
         end 
          
         private :spaceAvailable
     end 
 end 
+
+u=Deepspace::Hangar.new(1)
+w1=Deepspace::Weapon.new("arma1",Deepspace::WeaponType::LASER,5)
+w2=Deepspace::Weapon.new("arma2",Deepspace::WeaponType::LASER,5)
+
+puts u.addWeapon(w1)
+puts u.addWeapon(w2)
+
+u.to_s

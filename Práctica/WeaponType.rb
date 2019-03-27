@@ -7,7 +7,7 @@ module Deepspace
                 @power=p
             end 
          
-            def Type
+            def power
                 @power
             end 
         end 

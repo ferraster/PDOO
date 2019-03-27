@@ -1,6 +1,6 @@
 #encoding: UTF-8
 
-module DeepSpace 
+module Deepspace 
     class SuppliesPackage 
         def initialize(ammoPower_,fuelUnits_,shieldPower_)
             @ammoPower=ammoPower_
@@ -8,7 +8,7 @@ module DeepSpace
             @shieldPower=shieldPower_
         end 
 
-        attr_reader :ammorPower, :fuelUnits, :shieldPower
+        attr_reader :ammoPower, :fuelUnits, :shieldPower
 
         def self.newCopy(suppliesPackage_)
             new(suppliesPackage_.ammoPower,suppliesPackage_.fuelUnits,suppliesPackage_.shieldPower)

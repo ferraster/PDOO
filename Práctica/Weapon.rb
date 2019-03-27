@@ -1,5 +1,8 @@
 #encoding: UTF-8  
 
+require_relative 'WeaponToUI'
+require_relative 'WeaponType'
+
 module Deepspace 
     class Weapon 
         def initialize(name_,weaponType_,uses_)
@@ -13,6 +16,10 @@ module Deepspace
         def self.newCopy(w)
             new(w.name,w.type,w.uses)
         end
+
+        def power 
+            @type.power
+        end 
         
         def useIt
             if(self.uses>0)
