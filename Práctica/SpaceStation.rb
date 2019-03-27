@@ -26,7 +26,7 @@ module Deepspace
             @pendingDamage=nil
         end
 
-        attr_reader :nMedals , :fuelUnits , :shieldPower , :nMedals , :damage , :hangar , :shieldBoosters , :weapons , :pendingDamage 
+        attr_reader :ammoPower , :fuelUnits , :hangar , :name , :nMedals , :pendingDamage , :shieldBoosters , :shieldPower 
 
         def assignFuelValue(f)
             if(f>@@MAXFUEL)
@@ -128,12 +128,19 @@ module Deepspace
         end 
 
         def cleanUpMountedItems
-            @weapons.delete_if{ |weapon| weapon.uses == 0}
+            @weapons.delete_if{ |w| w.uses == 0}
+            @shieldBoosters.delete_if{ |s| s.uses == 0}
         end  
         
         def getUIversion
             SpaceStationToUI.new(self)
         end 
+
+        def to_s 
+            getUIversion.to_s
+        end 
+
+        private :assignFuelValue , :cleanPendingDamage
     end 
 
 end 

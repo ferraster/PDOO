@@ -1,13 +1,13 @@
 #encoding: UTF-8 
 
-require_relative 'WeaponType'
 require_relative 'Weapon'
 require_relative 'ShieldBooster'
+
 
 module Deepspace
     class Damage
 
-        private_class_method :new 
+        
         def initialize(w,s,wl)   
             @nWeapons=w
             @nShields=s
@@ -77,6 +77,14 @@ module Deepspace
                 @nShields=@nShields-1
             end
         end 
+
+        def to_s 
+            getUIversion.to_s
+        end 
+
+        private :arrayContainsType 
+        private_class_method :new 
+
     end 
 end
 
@@ -104,7 +112,7 @@ s.push(a)
 s.push(b)
 s.push(c)
 puts d.inspect
-puts d.arrayContainsType(armillas,Deepspace::WeaponType::MISSILE)
+#puts d.arrayContainsType(armillas,Deepspace::WeaponType::MISSILE)
 #d=d.adjust(armillas,s)
 #puts d.inspect
 #puts nuevo.hasNoEffect

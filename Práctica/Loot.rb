@@ -1,6 +1,7 @@
 #encoding: UTF-8
 
-module DeepSpace
+
+module Deepspace
     class Loot
         attr_reader :nSupplies, :nWeapons, :nShields, :nHangars, :nMedals
     

@@ -1,6 +1,5 @@
 #encoding: UTF-8  
 
-require_relative 'WeaponToUI'
 require_relative 'WeaponType'
 
 module Deepspace 

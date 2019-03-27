@@ -1,54 +1,69 @@
 #encoding: utf-8
 
+require_relative 'GameStateControler'
+require_relative 'SpaceStation'
+require_relative 'Dice'
+require_relative 'ShotResult'
+require_relative 'EnemyStarShip'
+
+
 module Deepspace 
 
     class GameUniverse 
 
         @@WIN=10 
 
-        def initialize(c,s,game,d)
-            @currentStationIndex=c
-            @turn=0
-            @currentStation=s
-            @spaceStations=Array.new
-            @gameState=game
+        def initialize()
+            @gameState=GameStateControler.new
             @dice=Dice.new()
+
+            @turn=0
+            @currentStationIndex=-1
+    
+            @currentStation=nil
+            @spaceStations=Array.new
+            @currentEnemy=nil
+            
         end 
 
         def haveAWinner
-            @spaceStations[@currentStationIndex].nMedals
+            @spaceStations[@currentStationIndex].nMedals==@@WIN
         end 
 
         def mountShieldBooster(i)
             if @gameState=GameState::INIT or @gameState=GameState::AFTERCOMBAT
-                @spaceStations.mountShieldBooster(i)
+                @currentStation.mountShieldBooster(i)
             end 
         end 
 
         def mountWeapon(i)
             if @gameState=GameState::INIT or @gameState=GameState::AFTERCOMBAT
-            @spaceStations.mountWeapon(i)
+                @currentStation.mountWeapon(i)
             end 
-        end 
+        end @spaceStation
 
         def discardWeapon(i)
             if @gameState=GameState::INIT or @gameState=GameState::AFTERCOMBAT
-                @spaceStation.discardWeapon(i)
+                @currentStation.discardWeapon(i)
             end
         end 
 
         def discardShieldBooster(i)
             if @gameState=GameState::INIT or @gameState=GameState::AFTERCOMBAT
-                @spaceStation.discardShieldBooster(i)
+                @currentStation.discardShieldBooster(i)
             end 
         end 
 
         def discardHangar 
-            @spaceStation.discardHangar
+            @currentStation.discardHangar
         end 
 
         def discardShieldBoosterInHangar(i)
-            @spaceStation.hangar.discardShieldBooster(i)
+            @currentStation.hangar.discardShieldBooster(i)
+        end 
+
+        def discardWeaponInHangar(i)
+            @currentStation.hangar.discardWeaponInHangar(i)
         end 
 
         def getState
@@ -56,7 +71,7 @@ module Deepspace
         end 
 
         def getUIversion
-            new GameUniverseToUI(self)
+            GameUniverseToUI.new(self)
         end 
     end 
 

@@ -1,5 +1,8 @@
 #encoding: utf-8
 
+require_relative 'Damage'
+require_relative 'Loot'
+
 module Deepspace
     class EnemyStarShip
 
@@ -14,32 +17,25 @@ module Deepspace
         attr_reader :ammoPower , :name  , :shieldPower , :loot , :damage
 
         def self.newCopy(e)
-            @ammoPower=e.ammoPower
-            @name=e.name
-            @shieldPower=e.shieldPower
-            @loot=e.loot
-            @damage=e.damage
+            new(e.ammoPower,e.name,e.shieldPower,e.loot,e.damage)
         end 
 
         def getUIversion
-            new EnemyToUI(self)
+            EnemyToUI.new(self)
+        end 
+
+        def to_s 
+            getUIversion.to_s
         end 
 
         def protection 
             @shieldPower
         end 
 
-        def power 
+        def fire 
             @ammoPower
         end 
 
-        def getDamage
-            @damage
-        end 
-
-        def shieldPower
-            @shieldPower
-        end 
 
         def receiveShot(shot)
             if shot>@shieldPower
@@ -48,18 +44,11 @@ module Deepspace
                 ShotResult::RESIST
             end
         end 
-
-        def getAmmoPower
-            @ammoPower
-        end 
-
-        def getLoot 
-            @loot
-        end 
-
-        def getName
-            @name 
-        end
     end
 end 
 
+a=Deepspace::Loot.new(1,2,3,4,5)
+b=Deepspace::Damage.newNumericWeapons(10,10)
+ene=Deepspace::EnemyStarShip.new(1,"uwu",2,a,b)
+
+ene.to_s
