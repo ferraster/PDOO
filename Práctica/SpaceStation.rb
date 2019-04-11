@@ -99,6 +99,10 @@ module Deepspace
             end 
         end 
 
+        def fire 
+            
+        end 
+
         def discardWeaponInhangar(i)
             if(@hangar!=nil)
                 @hangar.removeWeapon(i)
