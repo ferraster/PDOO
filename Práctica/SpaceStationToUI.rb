@@ -1,4 +1,9 @@
-
+require_relative 'Damage'
+require_relative 'Hangar'
+require_relative 'Weapon'
+require_relative 'ShieldBooster'
+require_relative 'SuppliesPackage'
+require_relative 'CardDealer'
 module Deepspace
 
 

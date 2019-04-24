@@ -1,6 +1,6 @@
 #encoding: UTF-8
 
-module DeepSpace 
+module Deepspace 
     module ShotResult
         DONOTRESIST=:donotresist
         RESIST=:resist

@@ -2,11 +2,13 @@
 
 require_relative 'Damage'
 require_relative 'Loot'
+require_relative 'EnemyToUI'
+require_relative 'ShotResult'
 
 module Deepspace
     class EnemyStarShip
 
-        def initialize(ammoPower_,name_,shieldPower_,loot_,damage_)
+        def initialize(name_,ammoPower_,shieldPower_,loot_,damage_)
             @ammoPower=ammoPower_
             @name=name_
             @shieldPower=shieldPower_
@@ -17,7 +19,7 @@ module Deepspace
         attr_reader :ammoPower , :name  , :shieldPower , :loot , :damage
 
         def self.newCopy(e)
-            new(e.ammoPower,e.name,e.shieldPower,e.loot,e.damage)
+            new(e.name,e.ammoPower,e.shieldPower,e.loot,e.damage)
         end 
 
         def getUIversion
@@ -47,8 +49,12 @@ module Deepspace
     end
 end 
 
+if $0 == __FILE__
+
 a=Deepspace::Loot.new(1,2,3,4,5)
 b=Deepspace::Damage.newNumericWeapons(10,10)
 ene=Deepspace::EnemyStarShip.new(1,"uwu",2,a,b)
 
 ene.to_s
+
+end 

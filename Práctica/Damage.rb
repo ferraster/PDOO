@@ -2,6 +2,7 @@
 
 require_relative 'Weapon'
 require_relative 'ShieldBooster'
+require_relative 'DamageToUI'
 
 
 module Deepspace
@@ -44,36 +45,23 @@ module Deepspace
             ret
         end 
 
+
         def adjust(w,s)
             if @nWeapons==-1 and @weapons != nil
-
-                if nWeapons==-1 and weapons != nil
-                    usados=Array.new(@weapons.length,false)
-                    tipos=w.map{|w| w.Type}
-                    i=0
-                    j=0
-                    tipos_finales=Array.new
-                    while i<tipos.length
-                        encontrado=false
-                        j=0
-                        while j<@weapons.length
-                            if @weapons[j].equals(tipos[i]) and usados[j].equals(false)
-                                usados[j]=true
-                                j=tipos.ĺength-1
-                                tipos_finales.push(@weapons[i])
-                            end 
-                            j++
-                        end 
-                        i++
-                    end
-                    self.class.newSpecificWeapons(tipos_finales,[@nShields,s.lenght].min)
-
-                elsif nWeapons!=-1 and weapons == nil
-                    self.class.newNumericWeapons([w.length,@nWeapons],[s.length,@nShields].min)
-                end 
+                weapons=Array.new(@weapons)
+                weap=w.map{|w| w.type}
+                final=Array.new
+                weapons.each{ |weapon|
+                    if weap.include?weapon
+                        weap.delete_at(weap.find_index(weapon))
+                        final.push(weapon)
+                    end 
+                }
                
-            elsif @nWeapons!=-1 and @weapons == nil
-                self.class.newNumericWeapons([w.length,@nWeapons],[s.length,@nShields].min)
+                self.class.newSpecificWeapons(final,[s.length,@nShields].min)
+
+            elsif @nWeapons!=-1 
+                self.class.newNumericWeapons([w.length,@nWeapons].min,[s.length,@nShields].min)
             end 
         end
 
@@ -87,13 +75,14 @@ module Deepspace
 
         def discardWeapon(w)
             if(@nWeapons==-1)
-                @weapons.delete(w.type)
-            else
-                if @nWeapons>0 
-                    @nWeapons=@nWeapons-1
+                for i in 0..@weapons.length-1 do
+                    if @weapons[i]==w.type
+                        @weapons.delete_at(i)
+                    end 
                 end 
+            elsif @nWeapons>0 
+                    @nWeapons=@nWeapons-1
             end
-            
         end 
 
         def discardShieldBooster()
@@ -112,9 +101,13 @@ module Deepspace
     end 
 end
 
-vector=Array.new(1){Deepspace::WeaponType::MISSILE}
-vector.push(Deepspace::WeaponType::LASER) 
-vector.push(Deepspace::WeaponType::PLASMA)
+
+
+if $0 == __FILE__
+vector=Array.new(3){Deepspace::WeaponType::PLASMA}
+
+vector.push(Deepspace::WeaponType::LASER)
+
 
 armillas=Array.new 
 
@@ -122,6 +115,9 @@ w1=Deepspace::Weapon.new("arma1",Deepspace::WeaponType::LASER,1)
 armillas.push(w1)
 w2=Deepspace::Weapon.new("arma2",Deepspace::WeaponType::MISSILE,1)
 armillas.push(w2)
+w3=Deepspace::Weapon.new("arma3",Deepspace::WeaponType::MISSILE,1)
+armillas.push(w3)
+
 
 
 nuevo=Deepspace::Damage.newNumericWeapons(0,0)
@@ -136,8 +132,8 @@ s.push(a)
 s.push(b)
 s.push(c)
 puts d.inspect
-#puts d.arrayContainsType(armillas,Deepspace::WeaponType::MISSILE)
-#d=d.adjust(armillas,s)
-#puts d.inspect
-puts nuevo.hasNoEffect
+d=d.adjust(armillas,s)
+puts "------------------------------------------------------------------"
+puts d.inspect
 
+end 

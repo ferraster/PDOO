@@ -1,6 +1,7 @@
 
 require 'singleton'
 
+
 module Controller
   
   DS=Deepspace
@@ -65,7 +66,7 @@ class Controller
         case result
         when DS::CombatResult::ENEMYWINS
           @view.lostCombatMessage()
-        when DS::CombatResult::STATIONESCAPES
+        when DS::CombatResult::STATIONSCAPES
           @view.escapeMessage()
         when DS::CombatResult::STATIONWINS
           @view.wonCombatMessage()
@@ -83,7 +84,7 @@ class Controller
     end
 
     def getState() 
-        return @model.state()
+        return @model.getState()
     end
     
     private

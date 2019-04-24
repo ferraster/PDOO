@@ -25,4 +25,3 @@ module Deepspace
 end 
 
 
-puts Deepspace::SuppliesPackage.new(1,2,3).to_s

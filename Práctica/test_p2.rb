@@ -15,7 +15,7 @@ module Deepspace
 
         puts "Prueba de Hangar: "
 
-        hangar1      = Hangar.newNume(5,2)
+        hangar1      = Hangar.new(5)
         arma1        = Weapon.new("Pistola",WeaponType::PLASMA,2)
         arma2        = Weapon.new("Cannon",WeaponType::LASER,0)
         arma3        = Weapon.new("Misil",WeaponType::MISSILE,5)

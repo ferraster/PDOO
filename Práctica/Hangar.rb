@@ -2,7 +2,7 @@
 
 require_relative 'ShieldBooster'
 require_relative 'Weapon'
-
+require_relative 'HangarToUI'
 
 module Deepspace 
     class Hangar 
@@ -16,7 +16,7 @@ module Deepspace
         attr_reader :shieldBoosters , :weapons , :maxElements
 
         def self.newCopy(h)
-            n=new(h.maxElements)
+            n=Hangar.new(h.maxElements)
             h.weapons.map{ |x| n.addWeapon(x)}
             h.shieldBoosters.map{ |x| n.addShieldBooster(x)}
             n
@@ -73,6 +73,8 @@ module Deepspace
     end 
 end 
 
+if $0 == __FILE__
+
 h=Deepspace::Hangar.new(1)
 w1=Deepspace::Weapon.new("arma1",Deepspace::WeaponType::LASER,5)
 w2=Deepspace::Weapon.new("arma2",Deepspace::WeaponType::LASER,5)
@@ -86,3 +88,4 @@ puts u.inspect
 puts "------"
 puts u.to_s
 
+end 

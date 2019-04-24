@@ -1,5 +1,7 @@
 #encoding: UTF-8
 
+require_relative 'GameCharacter'
+
 module Deepspace
     class Dice 
         def initialize()
@@ -43,13 +45,13 @@ module Deepspace
             ret=@RANDOM.rand(nPlayers-1)
         end 
 
-        def FirstShot 
+        def firstShot 
             prob=@RANDOM.rand(1.0)
             if(prob<@FIRSTSHOTPROB)
                 ret=GameCharacter::SPACESTATION
             else 
                 ret=GameCharacter::ENEMYSTARSHIP
-            end 
+            end                   
         end 
 
         def spaceStationMoves(speed)
@@ -72,6 +74,15 @@ module Deepspace
 end 
 
 
-d=Deepspace::Dice.new
+if $0 == __FILE__
 
-puts d.to_s
+    dice=Deepspace::Dice.new
+    contador0=0
+    contador1=0
+    for i in 0..100 do
+        ret=dice.initWithNShields
+    
+    end
+    puts "contador 1: #{contador1} ------ contador 0: #{contador0}"
+
+end 
